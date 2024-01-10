@@ -1,3 +1,6 @@
+#ifndef ERRORS_H
+#define ERRORS_H
+
 #pragma once
 
 #include <iostream>
@@ -22,3 +25,5 @@ namespace RobotError {
         }
     }
 }
+
+#endif

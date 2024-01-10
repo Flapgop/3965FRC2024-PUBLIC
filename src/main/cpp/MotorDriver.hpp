@@ -1,4 +1,5 @@
-
+#ifndef MOTOR_DRIVER_H
+#define MOTOR_DRIVER_H
 #pragma once
 
 #include "frc/geometry/Translation2d.h"
@@ -8,3 +9,4 @@ public:
     virtual void drive(frc::Translation2d amount);
     virtual void rotate(double amount);
 };
+#endif
