@@ -1,9 +1,31 @@
-
-#include "Errors.hpp"
 #include "Constants.h"
 #include "MotorDriver.hpp"
 #include MOTOR_INCLUDE
+
 #include <cmath>
+#include <iostream>
+
+namespace RobotError {
+    enum ErrorCode {
+        NO_ERROR = 0,
+        UNSUPPORTED_OPERATION
+    };
+
+    // TODO: Figure out why this causes problems
+    // std::string getErrorString(ErrorCode code) {
+    //     switch (code) {
+    //     case NO_ERROR:
+    //         return "No error.";
+    //         break;
+    //     case UNSUPPORTED_OPERATION:
+    //         return "Unsupported Operation.";
+    //         break;
+
+    //     default:
+    //         return "Unknown Error";
+    //     }
+    // }
+}
 
 // WARNING::::::::::::::::::::::::::::::::::::::::::::::::::::::
 // This class is extremely motor dependant, expect errors when changing MOTOR constants

@@ -6,7 +6,7 @@
 
 class MotorDriver {
 public:
-    virtual void drive(frc::Translation2d amount);
-    virtual void rotate(double amount);
+    virtual void drive(frc::Translation2d amount) = 0;
+    virtual void rotate(double amount) = 0;
 };
 #endif

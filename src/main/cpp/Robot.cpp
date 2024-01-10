@@ -39,15 +39,15 @@ private:
   MOTOR m_rightBackMotor{g_rbid, rev::CANSparkMaxLowLevel::MotorType::kBrushed};
 
   frc::XboxController m_controller{0};
-  MotorDriver m_driver;
+  MotorDriver* m_driver;
 
 public:
 
   void RobotInit() {
     #ifdef OMNI_WHEELS
-    m_driver = OmniDriver{&m_leftFrontMotor, &m_rightFrontMotor, new MOTOR*[]{&m_leftBackMotor}, new MOTOR*[]{&m_rightBackMotor}};
+    m_driver = new OmniDriver(&m_leftFrontMotor, &m_rightFrontMotor, new MOTOR*[]{&m_leftBackMotor}, new MOTOR*[]{&m_rightBackMotor});
     #else
-    m_driver = LeadFollowDriver{1.0f, &m_leftFrontMotor, &m_rightFrontMotor, new MOTOR*[]{&m_leftBackMotor}, new MOTOR*[]{&m_rightBackMotor}};
+    m_driver = new LeadFollowDriver(1.0f, &m_leftFrontMotor, &m_rightFrontMotor, new MOTOR*[]{&m_leftBackMotor}, new MOTOR*[]{&m_rightBackMotor});
     #endif
   }
 
@@ -105,8 +105,8 @@ public:
     #ifdef OMNI_WHEELS
     // TODO: Omni support
     #else
-    m_driver.drive(frc::Translation2d{units::meter_t(m_controller.GetLeftY()), units::meter_t(0.0)});
-    m_driver.rotate(m_controller.GetLeftX());
+    m_driver->drive(frc::Translation2d{units::meter_t(m_controller.GetLeftY()), units::meter_t(0.0)});
+    m_driver->rotate(m_controller.GetLeftX());
     #endif
   }
 
