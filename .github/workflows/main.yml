@@ -21,11 +21,11 @@ jobs:
       run: ls ./
     - name: Upload artifacts
       uses: actions/upload-artifact@v4
-        with:
-          # Name of the artifact to upload.
-          # Optional. Default is 'artifact'
-          name: artifacts
+      with:
+        # Name of the artifact to upload.
+        # Optional. Default is 'artifact'
+        name: artifacts
 
-          # A file, directory or wildcard pattern that describes what to upload
-          # Required.
-          path: build/exe/*
+        # A file, directory or wildcard pattern that describes what to upload
+        # Required.
+        path: build/exe/*
