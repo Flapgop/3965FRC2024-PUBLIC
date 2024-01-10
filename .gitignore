@@ -1,6 +1,9 @@
 # This gitignore has been specially created by the WPILib team.
 # If you remove items from this file, intellisense might break.
 
+# My things
+pushScript.bat
+
 ### C++ ###
 # Prerequisites
 *.d
@@ -106,7 +109,7 @@ Temporary Items
 ### VisualStudioCode ###
 .vscode/*
 !.vscode/settings.json
-!.vscode/tasks.json
+.vscode/tasks.json
 !.vscode/launch.json
 !.vscode/extensions.json
 
