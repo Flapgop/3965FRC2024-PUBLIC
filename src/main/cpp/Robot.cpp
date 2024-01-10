@@ -9,12 +9,12 @@
 // TODO: - Hide all of it behind a nice class that makes it look friendly and not scary at all
 // TODO: - Fake swivel drives with omindirs and a fancy coordinate system
 
-#include "XDriveRobot.hpp"
+#include "Robot.h"
 
 #include <frc2/command/CommandScheduler.h>
 
-void XDriveRobot::RobotInit() {
-  m_controller = frc::XboxController{0};
+void Robot::RobotInit() {
+  
 }
 
 /**
@@ -25,7 +25,7 @@ void XDriveRobot::RobotInit() {
  * <p> This runs after the mode specific periodic functions, but before
  * LiveWindow and SmartDashboard integrated updating.
  */
-void XDriveRobot::RobotPeriodic() {
+void Robot::RobotPeriodic() {
   frc2::CommandScheduler::GetInstance().Run();
 }
 
@@ -34,15 +34,15 @@ void XDriveRobot::RobotPeriodic() {
  * can use it to reset any subsystem information you want to clear when the
  * robot is disabled.
  */
-void XDriveRobot::DisabledInit() {}
+void Robot::DisabledInit() {}
 
-void XDriveRobot::DisabledPeriodic() {}
+void Robot::DisabledPeriodic() {}
 
 /**
  * This autonomous runs the autonomous command selected by your {@link
  * RobotContainer} class.
  */
-void XDriveRobot::AutonomousInit() {
+void Robot::AutonomousInit() {
   m_autonomousCommand = m_container.GetAutonomousCommand();
 
   if (m_autonomousCommand) {
@@ -50,11 +50,11 @@ void XDriveRobot::AutonomousInit() {
   }
 }
 
-void XDriveRobot::AutonomousPeriodic() {
+void Robot::AutonomousPeriodic() {
 
 }
 
-void XDriveRobot::TeleopInit() {
+void Robot::TeleopInit() {
   // This makes sure that the autonomous stops running when
   // teleop starts running. If you want the autonomous to
   // continue until interrupted by another command, remove
@@ -67,31 +67,31 @@ void XDriveRobot::TeleopInit() {
 /**
  * This function is called periodically during operator control.
  */
-void XDriveRobot::TeleopPeriodic() {
+void Robot::TeleopPeriodic() {
 
 }
 
 /**
  * This function is called periodically during test mode.
  */
-void XDriveRobot::TestPeriodic() {}
+void Robot::TestPeriodic() {}
 
 /**
  * This function is called once when the robot is first started up.
  */
-void XDriveRobot::SimulationInit() {
+void Robot::SimulationInit() {
   
 }
 
 /**
  * This function is called periodically whilst in simulation.
  */
-void XDriveRobot::SimulationPeriodic() {
+void Robot::SimulationPeriodic() {
 
 }
 
 #ifndef RUNNING_FRC_TESTS
 int main() {
-  return frc::StartRobot<XDriveRobot>();
+  return frc::StartRobot<Robot>();
 }
 #endif
