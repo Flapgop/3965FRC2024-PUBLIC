@@ -11,9 +11,11 @@ jobs:
       uses: actions/checkout@v3
     - name: Setup Gradle
       uses: gradle/gradle-build-action@v2
-    - name: permissions moment
+    - name: Permissions moment
       run: chmod +x ./gradlew
-    - name: install robot toolchain
+    - name: Install robot toolchain
       run: ./gradlew installRoboRioToolchain
     - name: Run build with Gradle Wrapper
       run: ./gradlew build
+    - name: List files
+      run: ls ./
