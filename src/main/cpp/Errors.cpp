@@ -2,7 +2,7 @@
 
 #include <iostream>
 
-namespace Error {
+namespace RobotError {
     enum ErrorCode {
         NO_ERROR = 0,
         UNSUPPORTED_OPERATION

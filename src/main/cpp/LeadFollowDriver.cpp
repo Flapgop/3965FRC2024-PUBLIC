@@ -38,7 +38,7 @@ public:
 
     void drive(frc::Translation2d vec) override {
         if (vec.X().value() != 0.0) {
-            throw Error::ErrorCode::UNSUPPORTED_OPERATION;
+            throw RobotError::ErrorCode::UNSUPPORTED_OPERATION;
         }
         m_leadLeftMotor->Set(std::clamp(vec.Y().value(), -m_maxSpeed, m_maxSpeed));
         m_leadRightMotor->Set(std::clamp(vec.Y().value(), -m_maxSpeed, m_maxSpeed));
@@ -46,7 +46,7 @@ public:
 
     void rotate(double amount) override {
         if (amount != 0.0) {
-            throw Error::ErrorCode::UNSUPPORTED_OPERATION;
+            throw RobotError::ErrorCode::UNSUPPORTED_OPERATION;
         }
         m_leadLeftMotor->Set(std::clamp(amount, -m_maxSpeed, m_maxSpeed));
         m_leadRightMotor->Set(std::clamp(-amount, -m_maxSpeed, m_maxSpeed));
