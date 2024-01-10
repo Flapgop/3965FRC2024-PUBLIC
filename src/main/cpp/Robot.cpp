@@ -43,7 +43,7 @@ private:
 
 public:
 
-  void Robot::RobotInit() {
+  void RobotInit() {
     #ifdef OMNI_WHEELS
     m_driver = OmniDriver{&m_leftFrontMotor, &m_rightFrontMotor, new MOTOR*[]{&m_leftBackMotor}, new MOTOR*[]{&m_rightBackMotor}};
     #else
@@ -59,7 +59,7 @@ public:
    * <p> This runs after the mode specific periodic functions, but before
    * LiveWindow and SmartDashboard integrated updating.
    */
-  void Robot::RobotPeriodic() override {
+  void RobotPeriodic() override {
     frc2::CommandScheduler::GetInstance().Run();
   }
 
@@ -68,15 +68,15 @@ public:
    * can use it to reset any subsystem information you want to clear when the
    * robot is disabled.
    */
-  void Robot::DisabledInit() override {}
+  void DisabledInit() override {}
 
-  void Robot::DisabledPeriodic() override {}
+  void DisabledPeriodic() override {}
 
   /**
    * This autonomous runs the autonomous command selected by your {@link
    * RobotContainer} class.
    */
-  void Robot::AutonomousInit() override {
+  void AutonomousInit() override {
     m_autonomousCommand = m_container.GetAutonomousCommand();
 
     if (m_autonomousCommand) {
@@ -84,11 +84,11 @@ public:
     }
   }
 
-  void Robot::AutonomousPeriodic() override {
+  void AutonomousPeriodic() override {
 
   }
 
-  void Robot::TeleopInit() override {
+  void TeleopInit() override {
     // This makes sure that the autonomous stops running when
     // teleop starts running. If you want the autonomous to
     // continue until interrupted by another command, remove
@@ -101,7 +101,7 @@ public:
   /**
    * This function is called periodically during operator control.
    */
-  void Robot::TeleopPeriodic() override {
+  void TeleopPeriodic() override {
     #ifdef OMNI_WHEELS
     // TODO: Omni support
     #else
@@ -113,19 +113,19 @@ public:
   /**
    * This function is called periodically during test mode.
    */
-  void Robot::TestPeriodic() override {}
+  void TestPeriodic() override {}
 
   /**
    * This function is called once when the robot is first started up.
    */
-  void Robot::SimulationInit() override {
+  void SimulationInit() override {
     
   }
 
   /**
    * This function is called periodically whilst in simulation.
    */
-  void Robot::SimulationPeriodic() override {
+  void SimulationPeriodic() override {
 
   }
 
