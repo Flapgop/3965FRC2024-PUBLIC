@@ -47,7 +47,7 @@ public:
     #ifdef OMNI_WHEELS
     m_driver = OmniDriver{&m_leftFrontMotor, &m_rightFrontMotor, new MOTOR*[]{&m_leftBackMotor}, new MOTOR*[]{&m_rightBackMotor}};
     #else
-    m_driver = LeadFollowDriver{100.0f, &m_leftFrontMotor, &m_rightFrontMotor, new MOTOR*[]{&m_leftBackMotor}, new MOTOR*[]{&m_rightBackMotor}};
+    m_driver = LeadFollowDriver{1.0f, &m_leftFrontMotor, &m_rightFrontMotor, new MOTOR*[]{&m_leftBackMotor}, new MOTOR*[]{&m_rightBackMotor}};
     #endif
   }
 
@@ -102,7 +102,12 @@ public:
    * This function is called periodically during operator control.
    */
   void Robot::TeleopPeriodic() override {
+    #ifdef OMNI_WHEELS
     // TODO: Omni support
+    #else
+    m_driver.drive(frc::Translation2d{units::meter_t(m_controller.GetLeftY()), units::meter_t(0.0)});
+    m_driver.rotate(m_controller.GetLeftX());
+    #endif
   }
 
   /**

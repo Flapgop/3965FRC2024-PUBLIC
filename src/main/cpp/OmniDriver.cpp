@@ -21,4 +21,12 @@ public:
     {
         
     }
+
+    void drive(frc::Translation2d vec) override {
+        // TODO:
+    }
+
+    void rotate(double amount) override {
+        // TODO:
+    }
 };
