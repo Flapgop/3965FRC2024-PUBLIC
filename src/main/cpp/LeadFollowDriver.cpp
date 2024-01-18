@@ -1,6 +1,7 @@
 #include "Constants.h"
 #include "MotorDriver.hpp"
 #include MOTOR_INCLUDE
+#include ENCODER_INCLUDE
 
 #include <cmath>
 #include <iostream>
@@ -29,9 +30,14 @@ namespace RobotError {
 
 // WARNING::::::::::::::::::::::::::::::::::::::::::::::::::::::
 // This class is extremely motor dependant, expect errors when changing MOTOR constants
+// please use encoders
 
 class LeadFollowDriver : public MotorDriver  {
 private:
+
+    ENCODER* m_leftEncoder;
+    ENCODER* m_rightEncoder;
+
     MOTOR* m_leadLeftMotor;
     MOTOR* m_leadRightMotor;
     MOTOR* m_followLeftMotors[8];
@@ -56,6 +62,10 @@ public:
             m_followLeftMotors[i]->Follow(*m_leadLeftMotor);
             m_followRightMotors[i]->Follow(*m_leadRightMotor);
         }
+    }
+
+    double getDistanceTraveled() {
+        return 0.0; // TODO
     }
 
     void drive(frc::Translation2d vec) override {

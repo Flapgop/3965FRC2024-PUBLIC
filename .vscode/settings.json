@@ -25,6 +25,10 @@
     "random": "cpp",
     "limits": "cpp",
     "valarray": "cpp",
-    "iostream": "cpp"
+    "iostream": "cpp",
+    "cstdlib": "cpp",
+    "complex": "cpp",
+    "cmath": "cpp",
+    "utility": "cpp"
   }
 }

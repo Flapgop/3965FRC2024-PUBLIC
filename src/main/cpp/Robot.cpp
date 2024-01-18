@@ -2,11 +2,22 @@
 // Open Source Software; you can modify and/or share it under the terms of
 // the WPILib BSD license file in the root directory of this project.
 
-// NOTE: We're using SPARK MAX motors
+// NOTE: We're using SPARK MAX motor controllers
+// NOTE: We may have to use Talon motor controllers if we don't have enough sparks
 
-// NOTE: If uncomment this line if you're using omni wheels (adds extra functionality)
+// The following defines add custom functionality
+
+// Uses a custom driver to make omni wheels function more compatibility (Requires at least 4 motors, 1 for each wheel)
 // #define OMNI_WHEELS
 
+// Adds object recognition support, this basically makes the autonomous period actually do something useful. (Requires Limelight)
+#define LIMELIGHT
+// This is extremely necessary for object recognition, because it enables the Google Coral TPU for Limelight. (Requires Limelight and Google Coral)
+// #define LIMELIGHT_ML
+
+// ==============================================
+
+#include <wpinet/PortForwarder.h>
 #include <frc/TimedRobot.h>
 #include <frc2/command/CommandPtr.h>
 #include <frc2/command/CommandScheduler.h>
@@ -16,6 +27,10 @@
 #include "OmniDriver.cpp"
 #else
 #include "LeadFollowDriver.cpp"
+#endif
+
+#ifdef LIMELIGHT
+#include "AutomatedVisionProcessor.cpp"
 #endif
 
 #include "Constants.h"
@@ -40,6 +55,9 @@ private:
 
   frc::XboxController m_controller{0};
   MotorDriver* m_driver;
+  #ifdef LIMELIGHT
+  AVP* m_visionProcessor;
+  #endif
 
 public:
 
@@ -48,6 +66,14 @@ public:
     m_driver = new OmniDriver(&m_leftFrontMotor, &m_rightFrontMotor, new MOTOR*[]{&m_leftBackMotor}, new MOTOR*[]{&m_rightBackMotor});
     #else
     m_driver = new LeadFollowDriver(1.0f, &m_leftFrontMotor, &m_rightFrontMotor, new MOTOR*[]{&m_leftBackMotor}, new MOTOR*[]{&m_rightBackMotor});
+    #endif
+
+    #ifdef LIMELIGHT
+    m_visionProcessor = new AVP(m_driver);
+    for (int port = 5800; port <= 5805; port++)
+    {
+        wpi::PortForwarder::GetInstance().Add(port, "limelight.local", port);
+    }
     #endif
   }
 
@@ -85,7 +111,9 @@ public:
   }
 
   void AutonomousPeriodic() override {
-
+    #ifdef LIMELIGHT
+    m_visionProcessor->periodic();
+    #endif
   }
 
   void TeleopInit() override {

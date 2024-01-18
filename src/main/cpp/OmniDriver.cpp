@@ -22,6 +22,10 @@ public:
         
     }
 
+    double getDistanceTraveled() {
+        return 0.0; // TODO;
+    }
+
     void drive(frc::Translation2d vec) override {
         // TODO:
     }
