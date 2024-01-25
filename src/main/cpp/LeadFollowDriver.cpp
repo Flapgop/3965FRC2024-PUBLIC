@@ -1,7 +1,7 @@
-#include "Constants.h"
 #include "MotorDriver.hpp"
-#include MOTOR_INCLUDE
-#include ENCODER_INCLUDE
+#include "rev/SparkAbsoluteEncoder.h"
+
+#include <frc/motorcontrol/MotorController.h>
 
 #include <cmath>
 #include <iostream>
@@ -28,29 +28,22 @@ namespace RobotError {
     // }
 }
 
-// WARNING::::::::::::::::::::::::::::::::::::::::::::::::::::::
-// This class is extremely motor dependant, expect errors when changing MOTOR constants
-// please use encoders
-
 class LeadFollowDriver : public MotorDriver  {
 private:
 
-    ENCODER* m_leftEncoder;
-    ENCODER* m_rightEncoder;
-
-    MOTOR* m_leadLeftMotor;
-    MOTOR* m_leadRightMotor;
-    MOTOR* m_followLeftMotors[8];
-    MOTOR* m_followRightMotors[8];
+    frc::MotorController* m_leadLeftMotor;
+    frc::MotorController* m_leadRightMotor;
+    frc::MotorController* m_followLeftMotors[8];
+    frc::MotorController* m_followRightMotors[8];
     double m_maxSpeed;
 
 public:
     LeadFollowDriver(
         double maxSpeed, // Hard limit so you don't overdo it.
-        MOTOR* leadLeftMotor,
-        MOTOR* leadRightMotor,
-        MOTOR* followLeftMotors[8], 
-        MOTOR* followRightMotors[8]):
+        frc::MotorController* leadLeftMotor,
+        frc::MotorController* leadRightMotor,
+        frc::MotorController* followLeftMotors[8], 
+        frc::MotorController* followRightMotors[8]):
         m_maxSpeed(maxSpeed),
         m_leadLeftMotor(leadLeftMotor),
         m_leadRightMotor(leadRightMotor)
@@ -59,8 +52,9 @@ public:
             m_followLeftMotors[i] = followLeftMotors[i];
             m_followRightMotors[i] = followRightMotors[i];
         
-            m_followLeftMotors[i]->Follow(*m_leadLeftMotor);
-            m_followRightMotors[i]->Follow(*m_leadRightMotor);
+            // TODO
+            // m_followLeftMotors[i]->Follow(*m_leadLeftMotor);
+            // m_followRightMotors[i]->Follow(*m_leadRightMotor);
         }
     }
 

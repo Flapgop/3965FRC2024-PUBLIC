@@ -12,7 +12,7 @@
 // degrees
 #define LIMELIGHT_ANGLE 45.0 
 // inches
-#define TARGET_HEIGHT 48.0
+#define TARGET_HEIGHT 52.0
 
 
 class AVP {

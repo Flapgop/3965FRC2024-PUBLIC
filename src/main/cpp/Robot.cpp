@@ -5,20 +5,12 @@
 // NOTE: We're using SPARK MAX motor controllers
 // NOTE: We may have to use Talon motor controllers if we don't have enough sparks
 
-// The following defines add custom functionality
-
-// Uses a custom driver to make omni wheels function more compatibility (Requires at least 4 motors, 1 for each wheel)
-// #define OMNI_WHEELS
-
-// Adds object recognition support, this basically makes the autonomous period actually do something useful. (Requires Limelight)
-#define LIMELIGHT
-// This is extremely necessary for object recognition, because it enables the Google Coral TPU for Limelight. (Requires Limelight and Google Coral)
-// #define LIMELIGHT_ML
-
 // ==============================================
 
+#include "Constants.h"
 #include <wpinet/PortForwarder.h>
 #include <frc/TimedRobot.h>
+#include <frc/motorcontrol/MotorController.h>
 #include <frc2/command/CommandPtr.h>
 #include <frc2/command/CommandScheduler.h>
 
@@ -33,9 +25,8 @@
 #include "AutomatedVisionProcessor.cpp"
 #endif
 
-#include "Constants.h"
 #include "RobotContainer.h"
-#include MOTOR_INCLUDE
+#include "rev/CANSparkMax.h"
 
 class Robot : public frc::TimedRobot {
 private:
@@ -48,10 +39,10 @@ private:
   // Motor ids, lf = left front, rb = right back, etc etc.
   // TODO: Configure these in Spark MAX Client
   static const int g_lfid = 0, g_rfid = 1, g_lbid = 2, g_rbid = 3;
-  MOTOR m_leftFrontMotor{g_lfid, rev::CANSparkMaxLowLevel::MotorType::kBrushed};
-  MOTOR m_rightFrontMotor{g_rfid, rev::CANSparkMaxLowLevel::MotorType::kBrushed};
-  MOTOR m_leftBackMotor{g_lbid, rev::CANSparkMaxLowLevel::MotorType::kBrushed};
-  MOTOR m_rightBackMotor{g_rbid, rev::CANSparkMaxLowLevel::MotorType::kBrushed};
+  rev::CANSparkMax m_leftFrontMotor{g_lfid, rev::CANSparkMaxLowLevel::MotorType::kBrushed};
+  rev::CANSparkMax m_rightFrontMotor{g_rfid, rev::CANSparkMaxLowLevel::MotorType::kBrushed};
+  rev::CANSparkMax m_leftBackMotor{g_lbid, rev::CANSparkMaxLowLevel::MotorType::kBrushed};
+  rev::CANSparkMax m_rightBackMotor{g_rbid, rev::CANSparkMaxLowLevel::MotorType::kBrushed};
 
   frc::XboxController m_controller{0};
   MotorDriver* m_driver;
@@ -63,9 +54,9 @@ public:
 
   void RobotInit() {
     #ifdef OMNI_WHEELS
-    m_driver = new OmniDriver(&m_leftFrontMotor, &m_rightFrontMotor, new MOTOR*[]{&m_leftBackMotor}, new MOTOR*[]{&m_rightBackMotor});
+    m_driver = new OmniDriver(&m_leftFrontMotor, &m_rightFrontMotor, new frc::MotorController*[]{&m_leftBackMotor}, new frc::MotorController*[]{&m_rightBackMotor});
     #else
-    m_driver = new LeadFollowDriver(1.0f, &m_leftFrontMotor, &m_rightFrontMotor, new MOTOR*[]{&m_leftBackMotor}, new MOTOR*[]{&m_rightBackMotor});
+    m_driver = new LeadFollowDriver(1.0f, &m_leftFrontMotor, &m_rightFrontMotor, new frc::MotorController*[]{&m_leftBackMotor}, new frc::MotorController*[]{&m_rightBackMotor});
     #endif
 
     #ifdef LIMELIGHT

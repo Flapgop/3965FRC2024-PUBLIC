@@ -1,19 +1,18 @@
-#include "Constants.h"
 #include "MotorDriver.hpp"
-#include MOTOR_INCLUDE
+#include <frc/motorcontrol/MotorController.h>
 
 class OmniDriver : public MotorDriver {
 private:
-    const MOTOR* m_frontLeftMotor;
-    const MOTOR* m_frontRightMotor;
-    const MOTOR* m_backLeftMotor;
-    const MOTOR* m_backRightMotor;
+    const frc::MotorController* m_frontLeftMotor;
+    const frc::MotorController* m_frontRightMotor;
+    const frc::MotorController* m_backLeftMotor;
+    const frc::MotorController* m_backRightMotor;
 public:
     OmniDriver(
-        MOTOR* frontLeftMotor,
-        MOTOR* frontRightMotor,
-        MOTOR* backLeftMotor, 
-        MOTOR* backRightMotor):
+        frc::MotorController* frontLeftMotor,
+        frc::MotorController* frontRightMotor,
+        frc::MotorController* backLeftMotor, 
+        frc::MotorController* backRightMotor):
         m_frontLeftMotor(frontLeftMotor),
         m_frontRightMotor(frontRightMotor),
         m_backLeftMotor(backLeftMotor),
