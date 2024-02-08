@@ -16,13 +16,13 @@
 
 // TODO: Maybe add more driver methods
 #ifdef OMNI_WHEELS
-#include "OmniDriver.cpp"
+#include "drivers/OmniDriver.cpp"
 #else
-#include "LeadFollowDriver.cpp"
+#include "drivers/LeadFollowDriver.cpp"
 #endif
 
 #ifdef LIMELIGHT
-#include "AutomatedVisionProcessor.cpp"
+#include <vision/AutomatedVisionProcessor.hpp>
 #endif
 
 #include "RobotContainer.h"
@@ -38,17 +38,19 @@ private:
 
   // Motor ids, lf = left front, rb = right back, etc etc.
   // TODO: Configure these in Spark MAX Client
-  static const int g_lfid = 0, g_rfid = 1, g_lbid = 2, g_rbid = 3;
-  rev::CANSparkMax m_leftFrontMotor{g_lfid, rev::CANSparkMaxLowLevel::MotorType::kBrushed};
-  rev::CANSparkMax m_rightFrontMotor{g_rfid, rev::CANSparkMaxLowLevel::MotorType::kBrushed};
-  rev::CANSparkMax m_leftBackMotor{g_lbid, rev::CANSparkMaxLowLevel::MotorType::kBrushed};
-  rev::CANSparkMax m_rightBackMotor{g_rbid, rev::CANSparkMaxLowLevel::MotorType::kBrushed};
+  static inline constexpr int g_lfid = 0, g_rfid = 1, g_lbid = 2, g_rbid = 3, g_itkid = 4, g_nbid = 5, g_nd1id = 6, g_nd2id = 7;
+  rev::CANSparkMax m_leftFrontMotor{g_lfid, rev::CANSparkMaxLowLevel::MotorType::kBrushed}; // Left Front (Gearbox connected) Motor
+  rev::CANSparkMax m_rightFrontMotor{g_rfid, rev::CANSparkMaxLowLevel::MotorType::kBrushed}; // Right Front (Gearbox connected) Motor
+  rev::CANSparkMax m_leftBackMotor{g_lbid, rev::CANSparkMaxLowLevel::MotorType::kBrushed}; // Left Back (Gearbox connected) Motor
+  rev::CANSparkMax m_rightBackMotor{g_rbid, rev::CANSparkMaxLowLevel::MotorType::kBrushed}; // Right Back (Gearbox connected) Motor
+  rev::CANSparkMax m_intakeMotor{g_itkid, rev::CANSparkMaxLowLevel::MotorType::kBrushed}; // Bottom intake motor
+  rev::CANSparkMax m_noteBeltMotor{g_nbid, rev::CANSparkMaxLowLevel::MotorType::kBrushed}; // Note gantry belt motor
+  rev::CANSparkMax m_noteDriverMotor1{g_nd1id, rev::CANSparkMaxLowLevel::MotorType::kBrushed}; // Note "launcher" motor 1
+  rev::CANSparkMax m_noteDriverMotor2{g_nd2id, rev::CANSparkMaxLowLevel::MotorType::kBrushed}; // Note "launcher" motor 2
 
-  frc::XboxController m_controller{0};
+  frc::XboxController m_driver1{0}; // First Driver
+  frc::XboxController m_driver2{1}; // Second Driver
   MotorDriver* m_driver;
-  #ifdef LIMELIGHT
-  AVP* m_visionProcessor;
-  #endif
 
 public:
 
@@ -102,9 +104,7 @@ public:
   }
 
   void AutonomousPeriodic() override {
-    #ifdef LIMELIGHT
-    m_visionProcessor->periodic();
-    #endif
+    
   }
 
   void TeleopInit() override {
@@ -123,10 +123,12 @@ public:
   void TeleopPeriodic() override {
     #ifdef OMNI_WHEELS
     // TODO: Omni support
-    #else
-    m_driver->drive(frc::Translation2d{units::meter_t(m_controller.GetLeftY()), units::meter_t(0.0)});
-    m_driver->rotate(m_controller.GetLeftX());
     #endif
+
+    m_driver->drive(frc::Translation2d{units::meter_t(m_driver1.GetLeftY()), units::meter_t(0.0)});
+    m_driver->rotate(m_driver1.GetLeftX());
+
+    
   }
 
   /**

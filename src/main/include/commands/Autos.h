@@ -7,10 +7,17 @@
 #include <frc2/command/CommandPtr.h>
 
 #include "subsystems/ExampleSubsystem.h"
+#include "subsystems/CVSubsystem.h"
 
 namespace autos {
 /**
  * Example static factory for an autonomous command.
  */
 frc2::CommandPtr ExampleAuto(ExampleSubsystem* subsystem);
+
+/**
+ * Computer vision based autonomous command.
+ */
+frc2::CommandPtr ComputerVisionAuto(CVSubsystem* subsystem);
+
 }  // namespace autos
