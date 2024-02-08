@@ -68,6 +68,10 @@ public:
         }
         m_leadLeftMotor->Set(std::clamp(vec.Y().value(), -m_maxSpeed, m_maxSpeed));
         m_leadRightMotor->Set(std::clamp(vec.Y().value(), -m_maxSpeed, m_maxSpeed));
+        for (frc::MotorController* motor : m_followLeftMotors) 
+            motor->Set(std::clamp(vec.Y().value(), -m_maxSpeed, m_maxSpeed));
+        for (frc::MotorController* motor : m_followRightMotors)
+            motor->Set(std::clamp(vec.Y().value(), -m_maxSpeed, m_maxSpeed));
     }
 
     void rotate(double amount) override {
@@ -76,6 +80,10 @@ public:
         }
         m_leadLeftMotor->Set(std::clamp(amount, -m_maxSpeed, m_maxSpeed));
         m_leadRightMotor->Set(std::clamp(-amount, -m_maxSpeed, m_maxSpeed));
+        for (frc::MotorController* motor : m_followLeftMotors) 
+            motor->Set(std::clamp(amount, -m_maxSpeed, m_maxSpeed));
+        for (frc::MotorController* motor : m_followRightMotors)
+            motor->Set(std::clamp(-amount, -m_maxSpeed, m_maxSpeed));
     }
 
     ~LeadFollowDriver() {
