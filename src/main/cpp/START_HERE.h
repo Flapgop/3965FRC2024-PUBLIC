@@ -1,7 +1,7 @@
 #ifndef START_HERE_H
 #define START_HERE_H
 
-// This is where you'll find all the magical things that do things that you can't configure in the GUI
+// This is where you'll find all the magical things that do things that you can't configure elsewhere
 // Mostly hardware configuration, although I don't know what else might go here
 
 // HARDWARE ========================================================================================================================================

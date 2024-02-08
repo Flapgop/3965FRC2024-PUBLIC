@@ -38,15 +38,15 @@ private:
 
   // Motor ids, lf = left front, rb = right back, etc etc.
   // TODO: Configure these in Spark MAX Client
-  static inline constexpr int g_lfid = 0, g_rfid = 1, g_lbid = 2, g_rbid = 3, g_itkid = 4, g_nbid = 5, g_nd1id = 6, g_nd2id = 7;
+  static inline constexpr int g_lfid = 0, g_rfid = 1, g_lbid = 2, g_rbid = 3, g_nbid = 4, g_nd1id = 5, g_nd2id = 6, g_clid = 7;
   rev::CANSparkMax m_leftFrontMotor{g_lfid, rev::CANSparkMaxLowLevel::MotorType::kBrushed}; // Left Front (Gearbox connected) Motor
   rev::CANSparkMax m_rightFrontMotor{g_rfid, rev::CANSparkMaxLowLevel::MotorType::kBrushed}; // Right Front (Gearbox connected) Motor
   rev::CANSparkMax m_leftBackMotor{g_lbid, rev::CANSparkMaxLowLevel::MotorType::kBrushed}; // Left Back (Gearbox connected) Motor
   rev::CANSparkMax m_rightBackMotor{g_rbid, rev::CANSparkMaxLowLevel::MotorType::kBrushed}; // Right Back (Gearbox connected) Motor
-  rev::CANSparkMax m_intakeMotor{g_itkid, rev::CANSparkMaxLowLevel::MotorType::kBrushed}; // Bottom intake motor
   rev::CANSparkMax m_noteBeltMotor{g_nbid, rev::CANSparkMaxLowLevel::MotorType::kBrushed}; // Note gantry belt motor
   rev::CANSparkMax m_noteDriverMotor1{g_nd1id, rev::CANSparkMaxLowLevel::MotorType::kBrushed}; // Note "launcher" motor 1
   rev::CANSparkMax m_noteDriverMotor2{g_nd2id, rev::CANSparkMaxLowLevel::MotorType::kBrushed}; // Note "launcher" motor 2
+  rev::CANSparkMax m_intakeMotor{g_clid, rev::CANSparkMaxLowLevel::MotorType::kBrushed}; // Climber motor
 
   frc::XboxController m_driver1{0}; // First Driver
   frc::XboxController m_driver2{1}; // Second Driver
