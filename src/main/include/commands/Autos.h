@@ -6,8 +6,8 @@
 
 #include <frc2/command/CommandPtr.h>
 
-#include "subsystems/ExampleSubsystem.h"
-#include "subsystems/CVSubsystem.h"
+#include <subsystems/ExampleSubsystem.h>
+#include <subsystems/CVSubsystem.h>
 
 namespace autos {
 /**

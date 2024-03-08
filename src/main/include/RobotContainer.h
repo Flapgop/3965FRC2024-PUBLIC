@@ -9,6 +9,7 @@
 
 #include "Constants.h"
 #include "subsystems/ExampleSubsystem.h"
+#include "subsystems/CVSubsystem.h"
 
 /**
  * This class is where the bulk of the robot should be declared.  Since

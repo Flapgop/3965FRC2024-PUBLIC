@@ -54,7 +54,6 @@ private:
   rev::CANSparkMax m_noteDriverMotor1{g_nd1id, rev::CANSparkLowLevel::MotorType::kBrushed}; // Note "launcher" motor 1
   rev::CANSparkMax m_noteDriverMotor2{g_nd2id, rev::CANSparkLowLevel::MotorType::kBrushed}; // Note "launcher" motor 2
 
-
   frc::XboxController m_driver1{0}; // First Driver
   frc::XboxController m_driver2{1}; // Second Driver
   MotorDriver* m_driver;
@@ -135,7 +134,7 @@ public:
     m_driver->drive(frc::Translation2d{units::meter_t(m_driver1.GetLeftY()), units::meter_t(0.0)});
     m_driver->rotate(m_driver1.GetLeftX());
 
-    
+        
   }
 
   /**
